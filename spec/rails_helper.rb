@@ -3,6 +3,8 @@ require 'simplecov'
 SimpleCov.start
 
 require 'spec_helper'
+require 'webmock/rspec'
+
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
 # Prevent database truncation if the environment is production
@@ -63,5 +65,5 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
 
   config.include FactoryBot::Syntax::Methods
-
+  config.include Request::JsonHelpers, type: :controller
 end

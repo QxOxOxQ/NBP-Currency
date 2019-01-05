@@ -30,4 +30,19 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  nbp:
+    errors:
+      response:
+        lack_of_data: 'Lack of data for this request'
+        wrong_table: 'wrong tables'
+        wrong_date: 'wrong date'
+        wrong_code: 'wrong code'
+      currency:
+        wrong_format: "wrong format, example: 'EUR', 'eur', 'DOL'"
+      date:
+        range_between_dates_cannot_be_more_than_93_days: 'You can check days only between 93 days'
+        cannot_be_in_future: 'Date cannot be in future'
+        since_cannot_be_after_date: 'Since cannot be after date'
+        wrong_format: "wrong format of date, use YYYY/MM/DD, example: '2018-01-23'"
+      amount:
+        cannot_be_less_or_equal_0: "It's must to be more than 0"
