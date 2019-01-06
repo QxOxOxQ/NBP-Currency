@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class SaveNBPCurrencyWorker < ApplicationJob
+class SaveNBPCurrencyJob < ApplicationJob
   queue_as :save_nbp_currency
 
   def perform(currency:, since: nil, date:)

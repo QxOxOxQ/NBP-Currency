@@ -2,14 +2,12 @@
 
 require 'rails_helper'
 
-RSpec.describe SaveNBPCurrencyWorker, type: :job do
+RSpec.describe SaveNBPCurrencyJob, type: :job do
   describe '#perform later' do
     it 'enqueued job' do
       ActiveJob::Base.queue_adapter = :test
       expect do
-        described_class.perform_later(authorable_class: nil,
-                                      commentable_class: nil,
-                                      commentable_id: nil)
+        described_class.perform_later
       end.to have_enqueued_job
     end
   end
