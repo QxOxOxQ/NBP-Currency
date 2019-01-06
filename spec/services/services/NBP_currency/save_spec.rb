@@ -2,13 +2,13 @@
 
 require 'rails_helper'
 
-RSpec.describe Services::NBP_currency::Save, type: :service do
+RSpec.describe Services::NBPCurrency::Save, type: :service do
   describe '.call' do
     subject { described_class.call(currency: currency, since: since, date: date) }
 
     let(:currency) { 'USD' }
 
-    let(:service) { double(Services::NBP_currency::Fetch) }
+    let(:service) { double(Services::NBPCurrency::Fetch) }
 
     context 'when service to fatch returns errors ' do
       let(:since) { :since }
@@ -17,7 +17,7 @@ RSpec.describe Services::NBP_currency::Save, type: :service do
       let(:responce) { { errors: { date: 'Some error' } } }
 
       before do
-        allow(Services::NBP_currency::Fetch)
+        allow(Services::NBPCurrency::Fetch)
           .to receive(:new)
             .with(currency: currency,
                   since: since,
@@ -49,7 +49,7 @@ RSpec.describe Services::NBP_currency::Save, type: :service do
       let!(:count_of_currencies) { Currency.count }
 
       before do
-        allow(Services::NBP_currency::Fetch)
+        allow(Services::NBPCurrency::Fetch)
           .to receive(:new)
             .with(currency: currency,
                   since: since,

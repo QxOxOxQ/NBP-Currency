@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Services
-  module NBP_currency
+  module NBPCurrency
     class Save < Services::Application
       def initialize(currency:, date: Date.current, since: nil)
         @currency = currency
@@ -20,16 +20,16 @@ module Services
       private
 
       def currencies
-        @currencies ||= Services::NBP_currency::Fetch.call(currency: @currency,
-                                                           date: @date,
-                                                           since: @since)
+        @currencies ||= Services::NBPCurrency::Fetch.call(currency: @currency,
+                                                          date: @date,
+                                                          since: @since)
       end
 
       def save_currencies
         currencies['rates'].map do |currency|
           day = Day.find_or_create_by(date: convert_date(currency['effectiveDate']))
 
-          currency = Currency.new(name: @currency,
+          currency = Currency.new(name: @currency.upcase,
                                   day: day,
                                   rate: currency['mid'])
 
@@ -38,7 +38,7 @@ module Services
       end
 
       def save_empty_days
-        empty_date = (convert_date(@since)..convert_date(@date)).to_a - @saved_date
+        empty_date = (convert_date(@since)..convert_date(@date)).to_a - (@saved_date << Date.today)
         empty_date.each do |date|
           Day.create(date: date, lack_of_currency: true)
         end

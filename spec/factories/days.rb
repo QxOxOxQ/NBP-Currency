@@ -2,6 +2,7 @@
 
 FactoryBot.define do
   factory :day do
-    date { '2019-01-05' }
+    sequence(:date) { |n| Date.today - n.days }
+    lack_of_currency { false }
   end
 end

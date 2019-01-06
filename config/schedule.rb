@@ -4,6 +4,6 @@
 # http://en.wikipedia.org/wiki/Cron
 set :chronic_options, hours24: true
 
-every 1.day, at: '12:45' do
+every 1.day, at: '7:30' do
   runner "PeriodicSaveNBPCurrenciesJob.perform_later"
 end

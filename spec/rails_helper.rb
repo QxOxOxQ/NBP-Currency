@@ -46,7 +46,7 @@ RSpec.configure do |config|
 
   # RSpec Rails can automatically mix in different behaviours to your tests
   # based on their file location, for example enabling you to call `get` and
-  # `post` in specs under `spec/controllers`.
+  # `post` in specs under `spec/requests`.
   #
   # You can disable this behaviour by removing the line below, and instead
   # explicitly tag your specs with their type, e.g.:
@@ -65,5 +65,5 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
 
   config.include FactoryBot::Syntax::Methods
-  config.include Request::JsonHelpers, type: :controller
+  config.include Request::JsonHelpers, type: :request
 end

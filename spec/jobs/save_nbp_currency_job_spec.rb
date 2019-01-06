@@ -24,8 +24,8 @@ RSpec.describe SaveNBPCurrencyJob, type: :job do
     let(:currency) { :currency }
 
     before do
-      service = double(Services::NBP_currency::Save)
-      allow(Services::NBP_currency::Save)
+      service = double(Services::NBPCurrency::Save)
+      allow(Services::NBPCurrency::Save)
         .to receive(:new)
           .with(currency: currency,
                 since: since,

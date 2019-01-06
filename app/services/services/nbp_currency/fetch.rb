@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Services
-  module NBP_currency
+  module NBPCurrency
     class Fetch < Services::Application
       ALLOW_DAYS_BY_API = 93
       def initialize(currency:, date: Date.current, since: nil)

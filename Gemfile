@@ -27,6 +27,7 @@ gem 'coffee-rails', '~> 4.2'
 gem 'turbolinks', '~> 5'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
+gem 'active_model_serializers', '~> 0.10.0'
 gem 'jbuilder', '~> 2.5'
 gem 'whenever', require: false
 # Use Redis adapter to run Action Cable in production

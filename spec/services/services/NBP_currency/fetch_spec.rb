@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Services::NBP_currency::Fetch, type: :service do
+RSpec.describe Services::NBPCurrency::Fetch, type: :service do
   describe '.call' do
     subject { described_class.call(currency: currency, since: since, date: date) }
 
