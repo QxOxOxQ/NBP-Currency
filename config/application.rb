@@ -29,5 +29,9 @@ module UberApp
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    config.time_zone = 'Europe/Warsaw'
+    config.active_record.default_timezone = :local
+    config.active_job.queue_adapter = :sidekiq
   end
 end
