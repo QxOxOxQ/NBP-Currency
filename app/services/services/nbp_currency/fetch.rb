@@ -46,7 +46,7 @@ module Services
       end
 
       def url
-        "http://api.nbp.pl/api/exchangerates/rates/#{table}/#{@currency}/#{@date}/"
+        "http://api.nbp.pl/api/exchangerates/rates/#{table}/#{@currency}/#{@since}/#{@date}/"
       end
 
       def params

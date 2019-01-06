@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe Services::NBP_currency::Fetch, type: :service do
   describe '.call' do
-    subject { described_class.call(date: date, currency: currency, since: since) }
+    subject { described_class.call(currency: currency, since: since, date: date) }
 
     let(:since) { nil }
     let(:response) do
@@ -16,7 +16,7 @@ RSpec.describe Services::NBP_currency::Fetch, type: :service do
     end
     before do
       stub_request(:get,
-                   "http://api.nbp.pl/api/exchangerates/rates/a/#{currency}/#{date}/?format=json")
+                   "http://api.nbp.pl/api/exchangerates/rates/a/#{currency}/#{date}/#{date}/?format=json")
         .to_return(response)
     end
 
@@ -33,6 +33,14 @@ RSpec.describe Services::NBP_currency::Fetch, type: :service do
 
       context 'when since is presence' do
         let(:since) { (Date.current - 13.days).strftime('%Y-%m-%d') }
+        let(:response) do
+          { status: 200,
+            body: "{\"table\":\"A\",
+              \"currency\":\"euro\",
+              \"code\":\"EUR\",
+              \"rates\":[{\"no\":\"002/A/NBP/2018\",\"effectiveDate\":\"#{date}\",\"mid\":4.1673},
+                         {\"no\":\"003/A/NBP/2018\",\"effectiveDate\":\"#{date}\",\"mid\":4.44}]}" }
+        end
 
         before do
           stub_request(:get,
@@ -81,9 +89,24 @@ RSpec.describe Services::NBP_currency::Fetch, type: :service do
 
     context 'when range of dates is 93 days' do
       let(:date) { Date.current.strftime('%Y-%m-%d') }
-      let(:date) { (Date.current - 93.days).strftime('%Y-%m-%d') }
+      let(:since) { (Date.current - 93.days).strftime('%Y-%m-%d') }
 
-      it 'returns error' do
+      let(:response) do
+        { status: 200,
+          body: "{\"table\":\"A\",
+              \"currency\":\"euro\",
+              \"code\":\"EUR\",
+              \"rates\":[{\"no\":\"002/A/NBP/2018\",\"effectiveDate\":\"#{date}\",\"mid\":4.1673},
+                         {\"no\":\"003/A/NBP/2018\",\"effectiveDate\":\"#{date}\",\"mid\":4.44}]}" }
+      end
+
+      before do
+        stub_request(:get,
+                     "http://api.nbp.pl/api/exchangerates/rates/a/#{currency}/#{since}/#{date}/?format=json")
+          .to_return(response)
+      end
+
+      it 'returns response' do
         expect(subject).to eq(JSON.parse(response[:body]))
       end
     end
